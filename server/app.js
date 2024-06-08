@@ -5,9 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-// app.get("/getNotes", (req, res) => {
-//     res.send("this should be the notes");
-// });
 app.use("/api/ball-tracker", router);
 
 const PORT = 8080;

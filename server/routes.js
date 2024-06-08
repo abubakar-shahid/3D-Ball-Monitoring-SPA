@@ -1,11 +1,11 @@
 import express from 'express';
-import { getNotes, createNote, updateNote, deleteNote } from './controller.js';
+import { createUser, getUser, saveState, getState } from './controller.js';
 
 const router = express.Router();
 
-router.route("/getNotes").get(getNotes);
-// router.route("/signUp").post(controller.signUp);
-// router.route("/login").post(controller.login);
-// router.route("/saveState").post(controller.forgotCredentials);
+router.route("/createUser").put(createUser);
+router.route("/getUser").get(getUser);
+router.route("/saveState").put(saveState);
+router.route("/getState").get(getState);
 
 export default router;

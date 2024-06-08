@@ -1,0 +1,41 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+try {
+        const [dbResponse] = await pool.query(
+            `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`,
+            [req.body.username, req.body.email, req.body.password]
+        );
+        const resData = {
+            message: "Data Inserted Successfully!",
+            id: dbResponse.insertId
+        };
+        res.json(resData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+try {
+        const [rows] = await pool.query(`SELECT * FROM users where id = ?`, [req.body.id]);
+        const resData = {
+            message: "User Found!",
+            username: rows[0].username,
+            password: rows[0].password
+        };
+        res.json(resData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+try {
+        const [dbResponse] = await pool.query(
+            `UPDATE ballinformation
+            SET x_coordinate = ?, y_coordinate = ?, z_coordinate = ?
+            WHERE username = ?`,
+            [req.body.x, req.body.y, req.body.z]
+        );
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
