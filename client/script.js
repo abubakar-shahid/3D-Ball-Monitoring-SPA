@@ -1,3 +1,30 @@
+$(document).ready(function () {
+    $(".section").hide();
+    $(".logout").hide();
+
+    $(".login").click(function () {
+        alert("Login Successful!")
+        $(".section").show();
+        $(".logout").show();
+
+        $(".login").hide();
+        $(".signUp").hide();
+        $(".forgotPassword").hide();
+    });
+
+    $(".logout").click(function () {
+        alert("User Logged Out Successfully!")
+        $(".section").hide();
+        $(".logout").hide();
+
+        $(".login").show();
+        $(".signUp").show();
+        $(".forgotPassword").show();
+    });
+});
+
+//---------------------------------------------------------------------------------------------
+
 const scene = new THREE.Scene();
 
 const renderer = new THREE.WebGLRenderer();

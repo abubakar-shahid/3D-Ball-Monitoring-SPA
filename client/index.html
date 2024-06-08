@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>3D Ball Tracker</title>
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -12,9 +13,10 @@
     <header class="header">
         <span class="heading">3D Ball Tracker</span>
         <div class="buttons">
-            <button id="button" class="login">Login</button>
-            <button id="button" class="signUp">SignUp</button>
-            <button id="button" class="forgotPassword">Forgot Password</button>
+            <button id="login" class="login">Login</button>
+            <button id="signUp" class="signUp">SignUp</button>
+            <button id="forgotPassword" class="forgotPassword">Forgot Password</button>
+            <button id="logout" class="logout">Logout</button>
         </div>
         <section class="section2">
             <div class="modal-content">
@@ -28,15 +30,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
     <script>
-        $(document).ready(function () {
-            $(".login").click(function () {
-                $(".section2").show();
-            });
+        // $(document).ready(function () {
+        //     $(".section").hide();
+        //     $(".logout").hide();
 
-            $("#closeButton").click(function () {
-                $(".section2").hide();
-            });
-        });
+        //     $(".login").click(function () {
+        //         alert("Login Successful!")
+        //         $(".section").show();
+        //         $(".logout").show();
+
+        //         $(".login").hide();
+        //         $(".signUp").hide();
+        //         $(".forgotPassword").hide();
+        //     });
+
+        //     $(".logout").click(function () {
+        //         alert("User Logged Out Successfully!")
+        //         $(".section").hide();
+        //         $(".logout").hide();
+
+        //         $(".login").show();
+        //         $(".signUp").show();
+        //         $(".forgotPassword").show();
+        //     });
+        // });
     </script>
 </body>
 
