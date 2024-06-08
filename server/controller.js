@@ -15,7 +15,7 @@ export async function createUser(req, res) {
             message: "Data Inserted Successfully!",
             id: dbResponse1.insertId
         };
-        res.status(200).json(resData);
+        res.status(201).json(resData);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
