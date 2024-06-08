@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Ball Tracker</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header class="header">
+        <span class="heading">3D Ball Tracker</span>
+        <div class="buttons">
+            <button id="button" class="login">Login</button>
+            <button id="button" class="signUp">SignUp</button>
+            <button id="button" class="forgotPassword">Forgot Password</button>
+        </div>
+        <section class="section2">
+            <div class="modal-content">
+                <h2>Modal</h2>
+                <p>Welcome to our Modal Window.</p>
+                <button id="closeButton"><b>Close</b></button>
+            </div>
+        </section>
+    </header>
+    <section class="section" id="section"></section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".login").click(function () {
+                $(".section2").show();
+            });
+
+            $("#closeButton").click(function () {
+                $(".section2").hide();
+            });
+        });
+    </script>
+</body>
+
+</html>
