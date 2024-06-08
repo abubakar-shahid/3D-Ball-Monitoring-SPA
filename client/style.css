@@ -1,5 +1,6 @@
-body {
+body, html {
     background-color: black;
+    height: 80%;
 }
 
 .header {
@@ -33,22 +34,41 @@ body {
     border: solid #140563 1px;
 }
 
+.noteClass {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.note {
+    color: white;
+    font-size: 40px;
+    font-style: italic;
+    background-color: #333;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
 
 /* /////////////////////////////////////////////////////////////////////////////////////// */
 
-
-.loginPage, .signUpPage {
+.loginPage,
+.signUpPage {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.9);
     z-index: 1000;
 }
 
-.loginPage-content, .signUpPage-content {
+.loginPage-content,
+.signUpPage-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -60,10 +80,20 @@ body {
     padding-bottom: 30px;
     border-radius: 5px;
     font-size: 20px;
+    text-align: center;
 }
 
-.closeLogin, closeSignUp {
-    width: 20px;
-    height: auto;
-    padding: 2px;
+#form1-input, #form2-input, #submit {
+    font-size: 20px;
+    padding: 3px;
+    margin: 2px;
+    text-align: center;
+    border-radius: 20px;
+    border: solid #140563 1px;
+}
+
+#submit {
+    padding: 5px;
+    border-radius: 10px;
+    color: rgb(12, 20, 81);
 }

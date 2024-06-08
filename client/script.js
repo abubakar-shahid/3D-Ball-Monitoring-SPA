@@ -8,10 +8,10 @@ $(document).ready(function () {
 
     $(".closeLogin").click(function () {
         alert("Login Successful!")
-
         $(".loginPage").hide();
         $(".login").hide();
         $(".signUp").hide();
+        $(".noteClass").hide();
 
         $(".section").show();
         $(".logout").show();
@@ -27,6 +27,7 @@ $(document).ready(function () {
         $(".signUpPage").hide();
         $(".login").hide();
         $(".signUp").hide();
+        $(".noteClass").hide();
 
         $(".section").show();
         $(".logout").show();
@@ -39,6 +40,7 @@ $(document).ready(function () {
 
         $(".login").show();
         $(".signUp").show();
+        $(".noteClass").show();
     });
 });
 

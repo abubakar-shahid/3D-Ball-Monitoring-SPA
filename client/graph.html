@@ -4,73 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Dashboard</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        #container {
-            width: 100%;
-            height: 100%;
-            background-color: #f0f0f0;
-        }
-    </style>
+    <title>Centered Login Form</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div id="container"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // Initialize Three.js scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(95, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('container').appendChild(renderer.domElement);
-
-        // Create a sphere to represent the ball
-        const geometry = new THREE.SphereGeometry(3, 72, 72);
-        const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-        const ball = new THREE.Mesh(geometry, material);
-        scene.add(ball);
-
-        // Set camera position
-        camera.position.z = 5;
-
-        // Function to update ball position randomly within a boundary
-        function updateBallPosition() {
-            const aspectRatio = window.innerWidth / window.innerHeight;
-            const boundary = 3; // Define the boundary size
-
-            // Calculate adjusted boundary based on aspect ratio
-            const adjustedBoundaryX = boundary * aspectRatio;
-            const adjustedBoundaryY = boundary;
-
-            // Random X and Y positions within the adjusted boundary
-            const randomX = Math.random() * - adjustedBoundaryX;
-            const randomY = Math.random() * - adjustedBoundaryY;
-            const randomZ = Math.random() * boundary; // Random Z position within the boundary
-
-            // Set the ball's position
-            ball.position.set(randomX, randomY, randomZ);
-        }
-
-
-
-        // Function to animate the scene
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Update ball position every three seconds
-        // setInterval(updateBallPosition, 1000);
-    </script>
+    <div class="noteClass">
+        <div class="note">
+            <form>
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
