@@ -24,7 +24,7 @@ export async function createUser(req, res) {
 
 export async function getUserInfo(req, res) {
     try {
-        const [userInfo] = await pool.query(`SELECT * FROM users where id = ?`, [req.body.id]);
+        const [userInfo] = await pool.query(`SELECT * FROM users where username = ?`, [req.body.username]);
         const [ballInfo] = await pool.query(`SELECT * FROM ballinformation where username = ?`, [userInfo[0].username]);
         if (userInfo.length === 0) {
             res.status(404).json({ message: 'User not found' });

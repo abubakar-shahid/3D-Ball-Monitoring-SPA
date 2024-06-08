@@ -15,46 +15,29 @@
         <div class="buttons">
             <button id="login" class="login">Login</button>
             <button id="signUp" class="signUp">SignUp</button>
-            <button id="forgotPassword" class="forgotPassword">Forgot Password</button>
             <button id="logout" class="logout">Logout</button>
         </div>
-        <section class="section2">
-            <div class="modal-content">
-                <h2>Modal</h2>
-                <p>Welcome to our Modal Window.</p>
-                <button id="closeButton"><b>Close</b></button>
-            </div>
-        </section>
     </header>
+    <section class="loginPage">
+        <div class="loginPage-content">
+            <h2>Login Details</h2>
+            <input type="text" class="loginUsername" placeholder="Username">
+            <input type="email" class="loginPassword" placeholder="Password">
+            <button class="closeLogin"><b>Close</b></button>
+        </div>
+    </section>
+    <section class="signUpPage">
+        <div class="signUpPage-content">
+            <h2>SignUp Details</h2>
+            <input type="text" class="signUpUsername" placeholder="Username">
+            <input type="text" class="signUpEmail" placeholder="Email">
+            <input type="email" class="signUpPassword" placeholder="Password">
+            <button class="closeSignUp"><b>Close</b></button>
+        </div>
+    </section>
     <section class="section" id="section"></section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
-    <script>
-        // $(document).ready(function () {
-        //     $(".section").hide();
-        //     $(".logout").hide();
-
-        //     $(".login").click(function () {
-        //         alert("Login Successful!")
-        //         $(".section").show();
-        //         $(".logout").show();
-
-        //         $(".login").hide();
-        //         $(".signUp").hide();
-        //         $(".forgotPassword").hide();
-        //     });
-
-        //     $(".logout").click(function () {
-        //         alert("User Logged Out Successfully!")
-        //         $(".section").hide();
-        //         $(".logout").hide();
-
-        //         $(".login").show();
-        //         $(".signUp").show();
-        //         $(".forgotPassword").show();
-        //     });
-        // });
-    </script>
 </body>
 
 </html>

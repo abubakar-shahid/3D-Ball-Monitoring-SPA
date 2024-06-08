@@ -3,13 +3,33 @@ $(document).ready(function () {
     $(".logout").hide();
 
     $(".login").click(function () {
-        alert("Login Successful!")
-        $(".section").show();
-        $(".logout").show();
+        $(".loginPage").show();
+    });
 
+    $(".closeLogin").click(function () {
+        alert("Login Successful!")
+
+        $(".loginPage").hide();
         $(".login").hide();
         $(".signUp").hide();
-        $(".forgotPassword").hide();
+
+        $(".section").show();
+        $(".logout").show();
+    });
+
+    $(".signUp").click(function () {
+        $(".signUpPage").show();
+    });
+
+    $(".closeSignUp").click(function () {
+        alert("SignUp Successful!")
+
+        $(".signUpPage").hide();
+        $(".login").hide();
+        $(".signUp").hide();
+
+        $(".section").show();
+        $(".logout").show();
     });
 
     $(".logout").click(function () {
@@ -19,7 +39,6 @@ $(document).ready(function () {
 
         $(".login").show();
         $(".signUp").show();
-        $(".forgotPassword").show();
     });
 });
 
