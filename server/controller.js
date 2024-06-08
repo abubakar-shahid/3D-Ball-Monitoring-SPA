@@ -47,7 +47,14 @@ export async function getUserInfo(req, res) {
 
 export async function saveState(req, res) {
     try {
-
+        const [userInfo] = await pool.query(`SELECT username FROM users where id = ?`, [req.body.id]);
+        const [ballInfo] = await pool.query(`
+            UPDATE ballinformation
+            SET x_coordinate = ?, y_coordinate = ?, z_coordinate = ?
+            WHERE username = ?`,
+            [req.body.x_coordinate, req.body.y_coordinate, req.body.z_coordinate, userInfo[0].username]
+        );
+        res.status(200).json({ message: "Ball State Updated!" });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });

@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.route("/createUser").put(createUser);
 router.route("/getUserInfo").get(getUserInfo);
-router.route("/saveState").put(saveState);
+router.route("/saveState").post(saveState);
 
 export default router;
