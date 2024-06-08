@@ -1,19 +1,13 @@
-import mysql from "mysql2"
+import mysql from 'mysql2';
+import dotenv from 'dotenv';
 
-import dotenv from 'dotenv'
-dotenv.config()
+dotenv.config();
 
 const pool = mysql.createPool({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
-}).promise()
+}).promise();
 
-async function getNotes() {
-    const [rows] = await pool.query("select * from notes")
-    return rows
-}
-
-const notes = await getNotes()
-console.log(notes)
+export default pool;
