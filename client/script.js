@@ -1,4 +1,3 @@
-// import { setBallState } from "./three.js";
 let currentUser = "";
 let intervalId = 0;
 //------------------------------------------------------------------------------------------
@@ -11,20 +10,72 @@ $(document).ready(function () {
         $(".signUpPage").hide();
     });
     //------------------------------------------------------------------------------------------
+    $(".signUp").click(function () {
+        $(".signUpPage").show();
+    });
+
+    $(".closeSignUp").click(function () {
+        fetchSignUpInfo();
+    });
+
+    function fetchSignUpInfo() {
+        if ($(".signUpPassword").val() === $(".signUpConfirm").val()) {
+            const userData = {
+                username: $(".signUpUsername").val(),
+                email: $(".signUpEmail").val(),
+                password: $(".signUpPassword").val()
+            };
+            $.ajax({
+                url: 'http://localhost:8080/api/ball-tracker/createUser',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(userData),
+                success: function (data) {
+                    confirmSignUp(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching user info:', error);
+                }
+            });   
+        } else {
+            alert("Passwords do not match!");
+        }
+    }
+
+    function confirmSignUp(user) {
+        if (user.message === "200") {
+            currentUser = user.username;
+            alert("SignUp Successful!")
+
+            $(".signUpPage").hide();
+            $(".login").hide();
+            $(".signUp").hide();
+            $(".noteClass").hide();
+
+            $(".section").show();
+            $(".logout").show();
+
+            setBallPosition(0, 0, 0);
+        } else {
+            console.log(user);
+            alert("Username or Email Already Exists!");
+        }
+    }
+    //------------------------------------------------------------------------------------------
     $(".login").click(function () {
         $(".loginPage").show();
     });
 
     $(".closeLogin").click(function () {
-        fetchUserInfo();
+        fetchLoginInfo();
     });
 
-    function fetchUserInfo() {
+    function fetchLoginInfo() {
         const userData = {
             username: $(".loginUsername").val(),
             password: $(".loginPassword").val()
         };
-
         $.ajax({
             url: 'http://localhost:8080/api/ball-tracker/getUserInfo',
             type: 'POST',
@@ -60,24 +111,9 @@ $(document).ready(function () {
         }
     }
     //------------------------------------------------------------------------------------------
-    $(".signUp").click(function () {
-        $(".signUpPage").show();
-    });
-
-    $(".closeSignUp").click(function () {
-        alert("SignUp Successful!")
-
-        $(".signUpPage").hide();
-        $(".login").hide();
-        $(".signUp").hide();
-        $(".noteClass").hide();
-
-        $(".section").show();
-        $(".logout").show();
-    });
-    //------------------------------------------------------------------------------------------
     $(".logout").click(function () {
         clearInterval(intervalId);
+        logOut();
 
         alert("User Logged Out Successfully!")
         $(".section").hide();
@@ -87,6 +123,25 @@ $(document).ready(function () {
         $(".signUp").show();
         $(".noteClass").show();
     });
+
+    function logOut() {
+        const ballPositions = {
+            username: currentUser,
+            x: ball.position.x,
+            y: ball.position.y,
+            z: ball.position.z,
+        }
+        $.ajax({
+            url: 'http://localhost:8080/api/ball-tracker/saveState',
+            type: 'PUT',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(ballPositions),
+            error: function (xhr, status, error) {
+                console.error('Error fetching user info:', error);
+            }
+        });
+    }
 });
 
 //-------------------------------------------------------------------------------------------
@@ -109,8 +164,8 @@ camera.position.z = 5;
 const canvas = document.createElement('canvas');
 canvas.width = 512;
 canvas.height = 512;
-const context = canvas.getContext('2d');
 
+const context = canvas.getContext('2d');
 context.fillStyle = 'blue';
 context.fillRect(0, 0, canvas.width, canvas.height);
 context.font = '48px Arial';
@@ -129,7 +184,6 @@ const material = new THREE.MeshPhongMaterial({ map: texture, shininess: 100 });
 const geometry = new THREE.SphereGeometry(1, 32, 32);
 
 const ball = new THREE.Mesh(geometry, material);
-
 scene.add(ball);
 
 const light = new THREE.PointLight(0xffffff, 1, 100);
@@ -143,25 +197,22 @@ function moveBallRandomly() {
     ball.position.x = (Math.random() - 0.5) * 4;
     ball.position.y = (Math.random() - 0.5) * 3;
     ball.position.z = (Math.random() - 0.5) * 3;
-    alert(ball.position.x + ", " + ball.position.y + ", " + "z" + ball.position.z);
+    alert(ball.position.x + ", " + ball.position.y + "," + ball.position.z);
 }
 
 function animate() {
     requestAnimationFrame(animate);
-
     ball.rotation.x += 0.01;
     ball.rotation.y += 0.01;
     ball.rotation.z += 0.01;
-
     renderer.render(scene, camera);
 }
-
 animate();
 
 function setBallPosition(x, y, z) {
     ball.position.x = x;
     ball.position.y = y;
     ball.position.z = z;
-    alert(ball.position.x + ", " + ball.position.y + ", " + "z" + ball.position.z);
+    alert(ball.position.x + ", " + ball.position.y + ", " + ball.position.z);
     intervalId = setInterval(moveBallRandomly, 3000);
 }
