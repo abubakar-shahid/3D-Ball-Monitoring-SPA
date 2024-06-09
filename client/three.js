@@ -7,13 +7,15 @@ $(document).ready(function () {
     $(".section").hide();
     $(".logout").hide();
 
-    // Initialize WebSocket connection
+    $(".closeWindow").click(function () {
+        $(".loginPage").hide();
+        $(".signUpPage").hide();
+    });
+    //-----------------------------------------------------------------------------------------
     ws = new WebSocket('ws://localhost:8080');
-
     ws.onopen = function () {
         console.log('Connected to WebSocket server');
     };
-
     ws.onmessage = function (event) {
         const data = JSON.parse(event.data);
         if (data.type === 'loginResponse') {
@@ -24,33 +26,21 @@ $(document).ready(function () {
             console.error('Error:', data.message);
         }
     };
-
     ws.onclose = function () {
         console.log('Disconnected from WebSocket server');
     };
-
     ws.onerror = function (error) {
         console.error('WebSocket encountered an error:', error);
     };
-
     window.addEventListener('beforeunload', function () {
         ws.close();
     });
-
-    $(".closeWindow").click(function () {
-        $(".loginPage").hide();
-        $(".signUpPage").hide();
-    });
-
+    //-----------------------------------------------------------------------------------------
     $(".signUp").click(function () {
         $(".signUpPage").show();
     });
 
     $(".closeSignUp").click(function () {
-        fetchSignUpInfo();
-    });
-
-    function fetchSignUpInfo() {
         if ($(".signUpPassword").val() === $(".signUpConfirm").val()) {
             const userData = {
                 type: 'createUser',
@@ -64,7 +54,7 @@ $(document).ready(function () {
         } else {
             alert("Passwords do not match!");
         }
-    }
+    });
 
     function confirmSignUp(user) {
         if (user.message === "200") {
@@ -85,17 +75,12 @@ $(document).ready(function () {
             alert("Username or Email Already Exists!");
         }
     }
-
+    //-----------------------------------------------------------------------------------------
     $(".login").click(function () {
         $(".loginPage").show();
     });
 
     $(".closeLogin").click(function () {
-        console.log("preparing to fetch login info");
-        fetchLoginInfo();
-    });
-
-    function fetchLoginInfo() {
         const userData = {
             type: 'getUserInfo',
             data: {
@@ -105,7 +90,7 @@ $(document).ready(function () {
         };
         console.log("preparing to send request");
         ws.send(JSON.stringify(userData));
-    }
+    });
 
     function confirmLogin(user) {
         if (user.message === "200") {
@@ -127,10 +112,11 @@ $(document).ready(function () {
             alert(user.message + ": User not Found!");
         }
     }
-
+    //-----------------------------------------------------------------------------------------
     $(".logout").click(function () {
         clearInterval(intervalId);
-        logOut();
+        saveBallPositions();
+        currentUser = "";
 
         alert("User Logged Out Successfully!")
         $(".section").hide();
@@ -140,20 +126,21 @@ $(document).ready(function () {
         $(".signUp").show();
         $(".noteClass").show();
     });
-
-    function logOut() {
-        const ballPositions = {
-            type: 'saveState',
-            data: {
-                username: currentUser,
-                x: ball.position.x,
-                y: ball.position.y,
-                z: ball.position.z,
-            }
-        };
-        ws.send(JSON.stringify(ballPositions));
-    }
 });
+
+function saveBallPositions() {
+    const ballPositions = {
+        type: 'saveState',
+        data: {
+            username: currentUser,
+            x: ball.position.x,
+            y: ball.position.y,
+            z: ball.position.z,
+        }
+    };
+    alert(ball.position.x + ", " + ball.position.y + "," + ball.position.z);
+    ws.send(JSON.stringify(ballPositions));
+}
 
 //-------------------------------------------------------------------------------------------
 
@@ -207,7 +194,7 @@ function moveBallRandomly() {
     ball.position.x = (Math.random() - 0.5) * 4;
     ball.position.y = (Math.random() - 0.5) * 3;
     ball.position.z = (Math.random() - 0.5) * 3;
-    alert(ball.position.x + ", " + ball.position.y + "," + ball.position.z);
+    saveBallPositions();
 }
 
 function animate() {
@@ -224,5 +211,5 @@ function setBallPosition(x, y, z) {
     ball.position.y = y;
     ball.position.z = z;
     alert(ball.position.x + ", " + ball.position.y + ", " + ball.position.z);
-    intervalId = setInterval(moveBallRandomly, 3000);
+    intervalId = setInterval(moveBallRandomly, 5000);
 }
