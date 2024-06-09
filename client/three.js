@@ -29,11 +29,19 @@ $(document).ready(function () {
         console.log('Disconnected from WebSocket server');
     };
 
+    ws.onerror = function (error) {
+        console.error('WebSocket encountered an error:', error);
+    };
+
+    window.addEventListener('beforeunload', function () {
+        ws.close();
+    });
+
     $(".closeWindow").click(function () {
         $(".loginPage").hide();
         $(".signUpPage").hide();
     });
-    //------------------------------------------------------------------------------------------
+
     $(".signUp").click(function () {
         $(".signUpPage").show();
     });
@@ -77,23 +85,25 @@ $(document).ready(function () {
             alert("Username or Email Already Exists!");
         }
     }
-    //------------------------------------------------------------------------------------------
+
     $(".login").click(function () {
         $(".loginPage").show();
     });
 
     $(".closeLogin").click(function () {
+        console.log("preparing to fetch login info");
         fetchLoginInfo();
     });
 
     function fetchLoginInfo() {
         const userData = {
-            type: 'login',
+            type: 'getUserInfo',
             data: {
                 username: $(".loginUsername").val(),
                 password: $(".loginPassword").val()
             }
         };
+        console.log("preparing to send request");
         ws.send(JSON.stringify(userData));
     }
 
@@ -117,7 +127,7 @@ $(document).ready(function () {
             alert(user.message + ": User not Found!");
         }
     }
-    //------------------------------------------------------------------------------------------
+
     $(".logout").click(function () {
         clearInterval(intervalId);
         logOut();

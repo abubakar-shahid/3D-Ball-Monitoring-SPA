@@ -79,7 +79,9 @@
 import pool from './database.js';
 
 export function handleWebSocketMessages(ws, message) {
+    console.log("in handleWebSocketMessages");
     const msg = JSON.parse(message);
+    console.log(msg);
 
     switch (msg.type) {
         case 'createUser':

@@ -31,7 +31,7 @@ const wss = new WebSocketServer({ server });
 wss.on('connection', function connection(ws) {
     console.log('Client connected to WebSocket');
     ws.on('message', function incoming(message) {
-        console.log('Received message from client:', message);
+        console.log('Received message from client: %s', message);
         handleWebSocketMessages(ws, message);
     });
     ws.on('close', function () {
