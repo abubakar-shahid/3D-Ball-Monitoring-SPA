@@ -3,7 +3,7 @@ import pool from './database.js';
 export function handleWebSocketMessages(ws, message) {
     console.log("in handleWebSocketMessages");
     const msg = JSON.parse(message);
-    console.log(msg);
+    console.log("msg:", msg);
 
     switch (msg.type) {
         case 'createUser':
@@ -24,7 +24,7 @@ export function handleWebSocketMessages(ws, message) {
 export async function handleCreateUser(ws, data) {
     try {
         const { username, email, password } = data;
-        const [rows] = await pool.query('SELECT COUNT(*) AS userCount FROM users WHERE username = ? or  email', [username, email]);
+        const [rows] = await pool.query('SELECT COUNT(*) AS userCount FROM users WHERE username = ? or  email = ?', [username, email]);
         const userCount = rows[0].userCount;
         if (userCount > 0) {
             ws.send(JSON.stringify({ type: "signUpResponse", message: "404" }));
@@ -73,7 +73,7 @@ export async function handleGetUserInfo(ws, data) {
                 };
                 ws.send(JSON.stringify(resData));
             } else {
-                ws.send(JSON.stringify({ message: "404" }));
+                ws.send(JSON.stringify({ type: "loginResponse", message: "404" }));
             }
         }
     } catch (error) {

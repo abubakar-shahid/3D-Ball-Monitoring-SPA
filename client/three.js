@@ -59,6 +59,11 @@ $(document).ready(function () {
     function confirmSignUp(user) {
         if (user.message === "200") {
             currentUser = user.username;
+            $(".signUpUsername").val("");
+            $(".signUpEmail").val("");
+            $(".signUpPassword").val("");
+            $(".signUpConfirm").val("");
+
             alert("SignUp Successful!")
 
             $(".signUpPage").hide();
@@ -71,7 +76,6 @@ $(document).ready(function () {
 
             setBallPosition(0, 0, 0);
         } else {
-            console.log(user);
             alert("Username or Email Already Exists!");
         }
     }
@@ -88,11 +92,12 @@ $(document).ready(function () {
                 password: $(".loginPassword").val()
             }
         };
-        console.log("preparing to send request");
         ws.send(JSON.stringify(userData));
     });
 
     function confirmLogin(user) {
+        console.log("in confirm login");
+        console.log(user);
         if (user.message === "200") {
             currentUser = user.username;
             $(".loginUsername").val("");
