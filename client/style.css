@@ -14,6 +14,11 @@ html {
     font-family: 'Brush Script MT', cursive;
     font-size: 40px;
     margin-left: 20px;
+    background: linear-gradient(to bottom, #240c9e, #151c5c, #043693);
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 .buttons {
@@ -21,9 +26,18 @@ html {
     margin-top: 6px;
 }
 
+.login:hover,
+.signUp:hover,
+.logout:hover,
+.closeLogin:hover,
+.closeSignUp:hover {
+    background-color: white;
+}
+
 .login,
 .signUp,
-.logout {
+.logout,
+.loggedUser {
     font-size: 20px;
     font-weight: bold;
     margin-right: 15px;
@@ -54,7 +68,14 @@ html {
     text-align: center;
 }
 
-/* /////////////////////////////////////////////////////////////////////////////////////// */
+.loggedUser {
+    background: linear-gradient(to bottom, #240c9e, #151c5c, #043693);
+    border: none;
+    color: white;
+    padding: 15px;
+    font-size: 30px;
+    font-style: normal;
+}
 
 .loginPage,
 .signUpPage {

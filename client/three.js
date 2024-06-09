@@ -71,6 +71,7 @@ $(document).ready(function () {
             $(".signUp").hide();
             $(".noteClass").hide();
 
+            $(".loggedUser").text("Logged-In as " + currentUser);
             $(".section").show();
             $(".logout").show();
 
@@ -109,6 +110,7 @@ $(document).ready(function () {
             $(".signUp").hide();
             $(".noteClass").hide();
 
+            $(".loggedUser").text(`Logged-In as "`  + currentUser + `"`);
             $(".section").show();
             $(".logout").show();
 
@@ -127,6 +129,7 @@ $(document).ready(function () {
         $(".section").hide();
         $(".logout").hide();
 
+        $(".loggedUser").text("User not Logged-In Yet!")
         $(".login").show();
         $(".signUp").show();
         $(".noteClass").show();
@@ -143,7 +146,7 @@ function saveBallPositions() {
             z: ball.position.z,
         }
     };
-    alert(ball.position.x + ", " + ball.position.y + "," + ball.position.z);
+    alert("State Saved as: " + ball.position.x + ", " + ball.position.y + "," + ball.position.z);
     ws.send(JSON.stringify(ballPositions));
 }
 
