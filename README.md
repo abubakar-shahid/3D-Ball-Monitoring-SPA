@@ -19,4 +19,4 @@ The project is a a single-page web application (SPA) that provides an API for tr
    OR
    node app.js
 9. Right click on the 'index.js' file in the 'client' folder and select the option 'Open with Live Server'.
-10. Make sure you have 'Live Server' extension downloaded in your VSCode to run the client in a userfriendly manner.
+10. Make sure you have 'Live Server' extension downloaded in your VSCode to run the client in a user-friendly manner.
