@@ -24,20 +24,34 @@ export async function createUser(req, res) {
 
 export async function getUserInfo(req, res) {
     try {
-        const [userInfo] = await pool.query(`SELECT * FROM users where username = ?`, [req.body.username]);
-        const [ballInfo] = await pool.query(`SELECT * FROM ballinformation where username = ?`, [userInfo[0].username]);
-        if (userInfo.length === 0) {
-            res.status(404).json({ message: 'User not found' });
+        console.log('Request Body:', req.body); // Debugging statement
+        const { username, password } = req.body;
+        console.log("request received, username: ", username, "password: ", password);
+
+        const [rows] = await pool.query('SELECT COUNT(*) AS userCount FROM users WHERE username = ?', [username]);
+        const userCount = rows[0].userCount;
+
+        if (userCount === 0) {
+            console.log("user not found");
+            res.status(200).json({ message: "404" });
         } else {
-            const resData = {
-                message: "User Found!",
-                username: userInfo[0].username,
-                password: userInfo[0].password,
-                x: ballInfo[0].x_coordinate,
-                y: ballInfo[0].y_coordinate,
-                z: ballInfo[0].z_coordinate
-            };
-            res.status(200).json(resData);
+            const [userInfo] = await pool.query(`SELECT * FROM users where username = ?`, [username]);
+            if (userInfo[0].password === password) {
+                const [ballInfo] = await pool.query(`SELECT * FROM ballinformation where username = ?`, [username]);
+                console.log(userInfo[0]);
+                const resData = {
+                    message: "200",
+                    username: userInfo[0].username,
+                    password: userInfo[0].password,
+                    x: ballInfo[0].x_coordinate,
+                    y: ballInfo[0].y_coordinate,
+                    z: ballInfo[0].z_coordinate
+                };
+                res.status(200).json(resData);
+            } else {
+                console.log("password not found");
+                res.status(200).json({ message: "404" });
+            }
         }
     } catch (error) {
         console.error(error);
