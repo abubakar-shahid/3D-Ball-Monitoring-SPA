@@ -1,4 +1,4 @@
-# RTC-League_Take-Home-Project
+# 3D Ball Monitoring SPA
 
 The project is a a single-page web application (SPA) that provides an API for tracking the position of a 3D-spahere in 3D space using three.js library. The application also have a web-based dashboard for displaying the ball's position in real-time with the help of Web Sockets. Moreover, the user-friendly interface for login/signup allows users to register as Ball Monitor.
 
