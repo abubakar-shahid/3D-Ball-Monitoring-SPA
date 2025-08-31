@@ -2,6 +2,9 @@
 
 The project is a a single-page web application (SPA) that provides an API for tracking the position of a 3D-spahere in 3D space using three.js library. The application also have a web-based dashboard for displaying the ball's position in real-time with the help of Web Sockets. Moreover, the user-friendly interface for login/signup allows users to register as Ball Monitor.
 
+## Demo
+Checkout Demo video at Loom: [Demo Video](https://www.loom.com/share/6b17f480a97247d19db2f89af3ae6d2e)
+
 ## Installation
 
 1. For installing the application on your device, first of all clone the repository.
